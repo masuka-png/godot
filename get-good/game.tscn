@@ -1,0 +1,74 @@
+[gd_scene load_steps=11 format=3 uid="uid://bf0qupapnbfes"]
+
+[ext_resource type="PackedScene" uid="uid://cx1vo5qodl8vj" path="res://player.tscn" id="1_80nbo"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_80nbo"]
+sky_top_color = Color(2.59906e-06, 0.635469, 0.791527, 1)
+sky_horizon_color = Color(0.852576, 1.17027, 1.2485, 1)
+ground_bottom_color = Color(0, 0.635294, 0.792157, 1)
+ground_horizon_color = Color(0.852576, 1.17027, 1.2485, 1)
+energy_multiplier = 1.05
+
+[sub_resource type="Sky" id="Sky_e2o6t"]
+sky_material = SubResource("ProceduralSkyMaterial_80nbo")
+
+[sub_resource type="Environment" id="Environment_feb5d"]
+background_mode = 2
+sky = SubResource("Sky_e2o6t")
+tonemap_mode = 2
+
+[sub_resource type="BoxMesh" id="BoxMesh_e2o6t"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_80nbo"]
+albedo_color = Color(1, 0.171979, 0.923164, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_mwb40"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e2o6t"]
+albedo_color = Color(0.240185, 0.315233, 1.44392e-07, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_feb5d"]
+albedo_color = Color(0, 0, 0.498039, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fc0e3"]
+albedo_color = Color(0, 0, 0.498039, 1)
+
+[node name="Game" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.108101, -0.317445, -0.121681)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_feb5d")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.778037, -0.544054, 0.314108, -1.49013e-08, 0.499998, 0.866027, -0.628218, -0.673801, 0.389017, 73.6574, 33.0685, 25.1625)
+shadow_enabled = true
+
+[node name="Player" parent="." instance=ExtResource("1_80nbo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 1.67652, 9)
+
+[node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="."]
+transform = Transform3D(2.55, 0, 0, 0, 1.275, 0, 0, 0, 2.55, 32.1802, 1.23546, -3.98971)
+
+[node name="CSGMesh3D2" type="CSGMesh3D" parent="MultiMeshInstance3D"]
+transform = Transform3D(70.5152, 0, 0, 0, -2.33744e-08, 13.1839, 0, -0.46327, 0, -12.484, 5.55799, -16.6867)
+mesh = SubResource("BoxMesh_e2o6t")
+material = SubResource("StandardMaterial3D_80nbo")
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="MultiMeshInstance3D"]
+transform = Transform3D(70.5152, 0, 0, 0, 0.92654, -1.78332e-13, 0, 0, 37.2395, -12.5897, -0.968988, 1.66506)
+use_collision = true
+mesh = SubResource("BoxMesh_mwb40")
+material = SubResource("StandardMaterial3D_e2o6t")
+
+[node name="CSGMesh3D3" type="CSGMesh3D" parent="MultiMeshInstance3D"]
+transform = Transform3D(70.5152, 0, 0, 0, -2.33744e-08, 13.1839, 0, -0.46327, 0, -13.7256, 3.58933, 19.6819)
+mesh = SubResource("BoxMesh_e2o6t")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="MultiMeshInstance3D"]
+transform = Transform3D(0.392157, 0, 0, 0, 0.392157, 0, 0, 0, 0.392157, -1.16744, -0.30533, -0.000338554)
+material = SubResource("StandardMaterial3D_feb5d")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="MultiMeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.48499e-05, 0.00319189, 0.000166297)
+use_collision = true
+material = SubResource("StandardMaterial3D_fc0e3")
